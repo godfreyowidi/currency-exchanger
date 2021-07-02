@@ -4,40 +4,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import Currency from './js/currency';
 
+let getElements = (response) => {
+  let outputNum = 0;
+  for (let choice of response) {
+    if (response.conversion_rate) {
+      outputNum *= `<h1>${choice}</h1>`;
+    }
+  }  
+  $('#output').append(outputNum);
+};
+
+async function makeAPICall(input, choice) {
+  const response = await Currency.get(input, choice);
+  getElements(response);
+}
+
 $(document).ready(function() {
   $("#convert-currency").submit(function(event) {
     event.preventDefault;
 
     let input = $("#us-dollars").val();
     let choice = $("#other-currency").val();
-    console.log("currency", Currency);
-    console.log("env", process.env.API_KEY);
-    console.log("choice", choice);
-
-    Currency.get(input)
-      .then(results => {
-        console.log('res', results);
-        if(results instanceof Error) {
-          throw Error('error to get to res');
-        }
-        console.log('res', results);
-        const data = results.conversion_rates;
-
-        for (let element of data) {
-          if (element.conversion_rates === "AED") {
-            console.log("another res", input * data);
-          } else if (element.conversion_rates === "EUR") {
-            console.log("another res", input * data);
-          } else if (element.conversion_rates === "JPY") {
-            console.log("another res", input * data);
-          } else if (element.conversion_rates === "INR") {
-            console.log("another res", input * data);
-          } else if (element.conversion_rates === "GBP") {
-            console.log("another res", input * data);
-          } else {
-            $('#noCurrency').show();
-          }
-        }
-      });
+    
+    makeAPICall(input, choice);
   });
 });
