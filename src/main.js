@@ -5,13 +5,14 @@ import './css/styles.css';
 import Currency from './js/currency';
 
 let getElements = (response) => {
-  let outputNum = 0;
+  let results = 0;
   for (let choice of response) {
-    if (response.conversion_rate) {
-      outputNum *= `<h1>${choice}</h1>`;
+    if (response.conversion_rate.AED) {
+      results = response.conversion_rate.AED * choice;
+      return results;
     }
   }  
-  $('#output').append(outputNum);
+  
 };
 
 async function makeAPICall(input, choice) {
@@ -22,6 +23,8 @@ async function makeAPICall(input, choice) {
 $(document).ready(function() {
   $("#convert-currency").submit(function(event) {
     event.preventDefault;
+
+    $('#output').text('');
 
     let input = $("#us-dollars").val();
     let choice = $("#other-currency").val();
