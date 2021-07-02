@@ -12,9 +12,9 @@ $(document).ready(function() {
     let input = $("#us-dollars").val();
     let choice = $("#other-currency").val();
     
-    let response = await Currency.get(input)
+    let response = Currency.get(input)
 
-    .then(function(results) {
+      .then(function(results) {
         if (results instanceof Error) {
           throw Error("err");
         }
@@ -23,7 +23,19 @@ $(document).ready(function() {
           outputAmt = response.conversion_rates.AED * input;
         } else if (choice === "EUR") {
           outputAmt = response.conversion_rates.EUR * input;
+        } else if (choice === "JPY") {
+          outputAmt = response.conversion_rates.JPY * input;
+        } else if (choice === "INR") {
+          outputAmt = response.conversion_rates.INR * input;
+        } else if (choice === "GBP") {
+          outputAmt = response.conversion_rates.GBP * input;
+        } else {
+          $("#noCurrency").text();
         }
-    })
+        $("#output").html(outputAmt);
+      })
+      .catch(function(error) {
+        $('#showErrors').text(`There was an error processing your request: ${error}`);
+      })
   });
 });
