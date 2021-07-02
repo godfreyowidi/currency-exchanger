@@ -14,6 +14,15 @@ $(document).ready(function() {
     console.log("env", process.env.API_KEY);
     console.log("choice", choice);
 
-    Currency.get(input);
+    Currency.get(input)
+      .then(results => {
+        console.log('res', results);
+        if(results instanceof Error) {
+          throw Error('error to get to res');
+        }
+        //let str = '';
+        console.log('res', results);
+        //const data = results.conversion_rates;
+      });
   });
 });
