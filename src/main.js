@@ -20,9 +20,14 @@ $(document).ready(function() {
         if(results instanceof Error) {
           throw Error('error to get to res');
         }
-        //let str = '';
         console.log('res', results);
-        //const data = results.conversion_rates;
+        const data = results.conversion_rates;
+
+        for (let element of data) {
+          if (element.conversion_rates === "AED") {
+            console.log("another res", input * data);
+          }
+        }
       });
   });
 });
