@@ -26,6 +26,16 @@ $(document).ready(function() {
         for (let element of data) {
           if (element.conversion_rates === "AED") {
             console.log("another res", input * data);
+          } else if (element.conversion_rates === "EUR") {
+            console.log("another res", input * data);
+          } else if (element.conversion_rates === "JPY") {
+            console.log("another res", input * data);
+          } else if (element.conversion_rates === "INR") {
+            console.log("another res", input * data);
+          } else if (element.conversion_rates === "GBP") {
+            console.log("another res", input * data);
+          } else {
+            $('#noCurrency').show();
           }
         }
       });
