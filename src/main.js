@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import Currency from './js/currency';
 
+async function makeApiCall(input, choice) {
+  const response = await Currency.get(input, choice);
+}
 
 $(document).ready(function() {
   $("#convert-currency").submit(function(event) {
@@ -12,10 +15,10 @@ $(document).ready(function() {
     let input = $("#us-dollars").val();
     let choice = $("#other-currency").val();
     
-    let response = Currency.get(input)
+    makeApiCall(input, choice)
 
       .then(function(results) {
-        if (results instanceof Error) {
+        if (response instanceof Error) {
           throw Error("err");
         }
         let outputAmt = 0;
@@ -36,6 +39,7 @@ $(document).ready(function() {
       })
       .catch(function(error) {
         $('#showErrors').text(`There was an error processing your request: ${error}`);
-      })
+      });
   });
 });
+
