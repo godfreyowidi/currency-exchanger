@@ -4,40 +4,30 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import Currency from './js/currency';
 
-let getElements = function(response) {
-  let outputAmt = 0;
-  if (response.conversion_rates.AED) {
-    outputAmt = response.conversion_rates.AED * response;
-  } else if (response.conversion_rates.EUR) {
-    outputAmt = response.conversion_rates.EUR * response;
-  } else if (response.conversion_rates.JPY) {
-    outputAmt = response.conversion_rates.JPY * response;
-  } else if (response.conversion_rates.INR) {
-    outputAmt = response.conversion_rates.INR * response;
-  } else if (response.conversion_rates.GBP) {
-    outputAmt = response.conversion_rates.GBP * response;
+function getElements(response) {
+  let results;
+  if (response.conversion_rates) {
+    results = response.conversion_rates.results;
   } else {
-    $("#noCurrency").text();
+    results = response.results;
   }
-  $("#output").html(outputAmt);
-};
-
-
-async function makeApiCall(input, choice) {
-  const response = await Currency.get(input, choice);
-  getElements(response);
 }
 
+for (input in results) {
+  if (results.conversion_rates === "AED") {
+    $("#showAED").text(`United Arab Emirate: ${results.conversion_rates.AED}`)
+  }
+}
 $(document).ready(function() {
-  $("#convert-currency").submit(function(event) {
+  $("#convert-currecny").submit(function(event) {
     event.preventDefault();
 
-    let input = $("#us-dollars").val();
-    let choice = $("#other-currency").val();
-    
-    console.log('')
-    console.log('input', input);
-    makeApiCall(input, choice);
+    const input = $("#other-currency").val();
+    const usDollar = parseInt($("#us-dollars")).val();
+
+    Currency.getConvert(input)
+      .then(function(response) {
+        getElements(response);
+      });  
   });
 });
-
