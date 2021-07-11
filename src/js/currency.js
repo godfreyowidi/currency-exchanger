@@ -6,10 +6,6 @@ export default class Currency {
           throw Error(response.statusText);
         } 
         return response.json();
-      })
-      .catch(function(error) {
-        return error;
       });
-  
   }
 }

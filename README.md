@@ -36,6 +36,7 @@
 6. At this point, you'll be able to access a dashboard that includes your API key as well as your remaining API calls for the month.
 7. Create a ```.env``` file in the root folder of the project and store the token as an assignment to a variable ```API_KEY```
 8. Include the ```.env``` into the ```.gitignore``` file and compile by running ```npm install``` to install all the dependencies.
+9. Finally start the development server by running ```npm start``` to start using the application.
 
 ## Known Bugs
 * _No known bugs_
