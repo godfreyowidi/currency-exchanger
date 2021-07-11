@@ -10,6 +10,7 @@
   <div class="container">
     <form id="convert-currency">
       <input type="integer" id="us-dollars">
+
       <select id="other-currency">
         <option value="disabled selected">select currency</option>
         <option value="AED">UAE Dirham</option>
@@ -18,11 +19,17 @@
         <option value="INR">Indian Rupee</option>
         <option value="GBP">Pound Sterling</option>
       </select><br>
+
       <button type="submit" class="btn btn-primary">Convert</button>
     </form>
   </div>
-  <p id="#noCurrency"></p>
-  <h1 id="output"></h1>
-  <p id="#showErrors"></p>
+
+  <p id="showAED"></p>
+  <p id="showEUR"></p>
+  <p id="showJPY"></p>
+  <p id="showINR"></p>
+  <p id="showGBP"></p>
+  <!-- <p id="errorHandler"></p> -->
+  <p id="noNum">Please Enter all input</p>
 </body>
 </html>
