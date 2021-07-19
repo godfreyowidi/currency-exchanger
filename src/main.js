@@ -9,32 +9,34 @@ function getElements(response, selectedCurr, dollars) {
   if (response.conversion_rates) {
     results = response.conversion_rates;
     if (selectedCurr === 'AED') {
-      console.log("results AED", results.AED, typeof results.AED);
-      console.log("results dollars", dollars, typeof dollars);
-      $("#showAED").text(`United Arab Emirate: ${results.AED * dollars}`); 
+      $("#showCurrency").text(`Conversion of ${dollars} USD to ${selectedCurr} is: ${results.AED * dollars}`); 
     } else if (selectedCurr === "EUR") {
-      $("#showEUR").text(`European EURO: ${results.EUR * dollars}`);
+      $("#showCurrency").text(`Conversion of ${dollars} USD to ${selectedCurr} is: ${results.EUR * dollars}`);
     } else if (selectedCurr === "JPY") {
-      $("#showJPY").text(`Japanese Yen: ${results.JPY * dollars}`);
+      $("#showCurrency").text(`Conversion of ${dollars} USD to ${selectedCurr} is: ${results.JPY * dollars}`);
     } else if (selectedCurr === "INR") {
-      $("#showINR").text(`Indian Rupee: ${results.INR * dollars}`);
+      $("#showCurrency").text(`Conversion of ${dollars} USD to ${selectedCurr} is: ${results.INR * dollars}`);
     } else if (selectedCurr === "GBP") {
-      $("#showGBP").text(`British Pound: ${results.GBP * dollars}`);
-    } 
+      $("#showCurrency").text(`Conversion of ${dollars} USD to ${selectedCurr} is: ${results.GBP * dollars}`);
+    } else {
+      $("#showCurrency").text("An error occurred, please check your inputs and try again.");
+    }
   }
 }
 
 $(document).ready(function() {
   $("#convert-currency").submit(function(event) {
     event.preventDefault();
-
+    $("#showResult").val('');
+    //$("#showAED, #showEUR, #showJPY, #showINR, #showGBP, #error").val('');
     const input = $("#other-currency").val();
     const usDollar = parseInt($("#us-dollars").val());
     console.log("us dollars", $("#us-dollars").val());
     $("#us-dollars").val('');
     
-    if (!input) {
-      $("#noNum").show();
+    
+    if (!input || !usDollar) {
+      $("#showCurrency").html("An error occurred, please enter a valid number input and select a currency.");
     } else {
       Currency.getConvert(input)
         .then(function(response) {
@@ -46,9 +48,9 @@ $(document).ready(function() {
         })
         .catch(function (error) {
           console.log("error", error)
-          $("#noNum").show();
-        });
-    }  
-    
+          $("#showCurrency").html("An error occurred, please check your inputs and try again.");
+        });  
+    }
+    //$("#convert-currency").reset();
   });
 });

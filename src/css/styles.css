@@ -3,7 +3,7 @@
   display: none;
 }
 
-#showAED, #showEUR, #showJPY, #showINR, #showGBP, #errorHandler, #noNum {
+#showCurrency {
   margin: auto;
   width: 58%;
 }

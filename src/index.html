@@ -10,7 +10,7 @@
   <div class="container">
     <form id="convert-currency">
       <input type="number" id="us-dollars">
-
+      
       <select id="other-currency">
         <option value="" disabled selected>select currency</option>
         <option value="AED">UAE Dirham</option>
@@ -18,17 +18,14 @@
         <option value="JPY">Japanese Yen</option>
         <option value="INR">Indian Rupee</option>
         <option value="GBP">Pound Sterling</option>
+        <option value="XYZ">Not valid Currency</option>
       </select><br>
 
       <button type="submit" class="btn btn-primary">Convert</button>
     </form>
   </div>
-
-  <p id="showAED"></p>
-  <p id="showEUR"></p>
-  <p id="showJPY"></p>
-  <p id="showINR"></p>
-  <p id="showGBP"></p>
-  <p id="noNum">Enter all input or check your API</p>
+  <div id="showResult">
+    <p id="showCurrency"></p>
+  </div>
 </body>
 </html>
